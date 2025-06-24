@@ -1,12 +1,17 @@
 import { html } from 'lit';
 import LitWithoutShadowDom from './base/LitWithoutShadowDom';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 
 class FooterApp extends LitWithoutShadowDom {
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     return html`
-      <p class="text-center text-white mb-0">
-        Made with <i class="bi bi-heart-fill text-primary"></i> by Dicoding Indonesia
-      </p>
+      <locale-picker class="d-block mb-3"></locale-picker>
+      <p class="text-center text-white mb-0">${msg(`Dibuat dengan 💙 oleh Dicoding Indonesia`)}</p>
     `;
   }
 }
