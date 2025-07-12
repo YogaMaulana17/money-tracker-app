@@ -1,3 +1,4 @@
+import Transactions from '../../network/transactions';
 import CheckUserAuth from '../auth/check-user-auth';
 const Add = {
   async init() {
@@ -48,14 +49,20 @@ const Add = {
     );
   },
 
-  _sendPost() {
+  async _sendPost() {
     const formData = this._getFormData();
 
     if (this._validateFormData({ ...formData })) {
       console.log('formData');
       console.log(formData);
 
-      // this._goToDashboardPage();
+      try {
+        const response = await Transactions.store(formData);
+        window.alert('New transaction added successfully');
+        this._goToDashboardPage();
+      } catch (error) {
+        console.error(error);
+      }
     }
   },
 
